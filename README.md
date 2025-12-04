@@ -8,7 +8,7 @@ The aim of this project is to first get the engine to a state where I can draw 2
 So far I've tested this only on macOS that supports OpenGL 4.1, so ymmv on other operating systems, I'm taking advantage of CMake, the dependencies of the project also use CMake (thankfully), so building should be relatively simple and straightforward. The general build steps would be like this:
 1. Clone the repo.
 ```
-git clone https://github.com/zenitopires/derelict
+git clone --recursive https://github.com/zenitopires/derelict
 ```
 2. Generate the build files.
 ```
