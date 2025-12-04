@@ -1,10 +1,9 @@
-#include "window.hpp"
+#include <derelict/window/window.hpp>
 
-#include <cstdlib>
 #include <glad/glad.h>
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
-#include "src/logging/logger.hpp"
+#include <derelict/logging/logger.hpp>
 
 bool s_SDLInitialized = false;
 
