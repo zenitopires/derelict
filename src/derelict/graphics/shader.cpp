@@ -1,8 +1,7 @@
-#include "shader.hpp"
+#include <derelict/graphics/shader.hpp>
 #include <fstream>
 #include <glad/glad.h>
-#include "src/logging/logger.hpp"
-#include <fmtmsg.h>
+#include <derelict/logging/logger.hpp>
 
 namespace derelict {
     Shader::Shader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath) {

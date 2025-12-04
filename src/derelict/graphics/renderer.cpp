@@ -1,4 +1,4 @@
-#include "renderer.hpp"
+#include <derelict/graphics/renderer.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace derelict {
@@ -6,13 +6,13 @@ namespace derelict {
         renderables.push_back(std::move(renderable));
     }
 
-    void Renderer::Clear(const glm::vec4 &color) {
+    void Renderer::Clear(const glm::vec4 &color) const {
         glClearColor(color.r, color.g, color.b, color.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void Renderer::Draw() {
-        for (auto renderable : renderables) {
+    void Renderer::Draw() const {
+        for (const std::shared_ptr<Renderable>& renderable : renderables) {
             renderable->vao->Bind();
             // glGetUniformLocation(shader, name);
             glUniformMatrix4fv(glGetUniformLocation(renderable->vao->GetShaderId(), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));

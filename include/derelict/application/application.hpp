@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "src/window/window.hpp"
-#include "src/graphics/renderer.hpp"
+#include "../window/window.hpp"
+#include "../graphics/renderer.hpp"
 
 namespace derelict {
     class Application {

@@ -1,5 +1,5 @@
-#include "vertex_array.hpp"
-#include "src/logging/logger.hpp"
+#include <derelict/graphics/vertex_array.hpp>
+#include <derelict/logging/logger.hpp>
 
 namespace derelict {
 VertexArray::VertexArray(std::shared_ptr<Data> data) {

@@ -7,7 +7,7 @@
 namespace derelict {
 class Renderable {
 public:
-    Renderable(glm::vec3 position, glm::mat4 transform, std::shared_ptr<VertexArray> vao) :
+    Renderable(const glm::vec3& position, const glm::mat4& transform, std::shared_ptr<VertexArray> vao) :
     position(position), transform(transform), vao(std::move(vao)) {}
 
     glm::vec3 position;
@@ -20,8 +20,8 @@ public:
     Renderer() = default;
 
     void Submit(std::shared_ptr<Renderable> r);
-    void Clear(const glm::vec4& color);
-    void Draw();
+    void Clear(const glm::vec4& color) const;
+    void Draw() const;
 
 private:
     std::vector<std::shared_ptr<Renderable>> renderables;

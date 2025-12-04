@@ -1,7 +1,7 @@
-#include "application.hpp"
+#include <derelict/application/application.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "src/logging/logger.hpp"
+#include <derelict/logging/logger.hpp>
 
 namespace derelict {
 
