@@ -12,15 +12,16 @@ So far I've tested this only on macOS that supports OpenGL 4.1, so ymmv on other
 ```
 cmake -S . -B build
 ```
-2. Then build the executable.
+2. Then build the library and the example executable.
 ```
 cmake --build build
 ```
 3. Finally run the application.
 ```
-./build/app
+cd build/examples
+./derelict_example
 ```
-If all goes well. You should see a blue rectangle drawn on your screen.
+If all goes well. You should see a colorful rectangle drawn on your screen.
 
 # Libraries
 Check out the dependencies of the project [here](docs/libraries.md)!
