@@ -28,3 +28,4 @@ If all goes well. You should see a colorful rectangle drawn on your screen.
 
 # Libraries
 Check out the dependencies of the project [here](docs/libraries.md)!
+
