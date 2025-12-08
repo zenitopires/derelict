@@ -35,16 +35,16 @@ VertexArray::~VertexArray() {
     glDeleteProgram(shader->GetId());
 }
 
-void VertexArray::Attribute() {
-}
+// void VertexArray::Attribute() {
+// }
 
-void VertexArray::Bind() {
+void VertexArray::Bind() const {
     // logDebug()
     shader->Use();
     glBindVertexArray(id);
 }
 
-void VertexArray::Unbind() {
+void VertexArray::Unbind() const {
     shader->Unuse();
     glBindVertexArray(0);
 }
