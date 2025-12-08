@@ -19,7 +19,7 @@ public:
     uint32_t GetId() const;
 
 private:
-    // Creates a shader program given the path to the vertex and fragment shaders.
+    // Creates a shader program given the path to the shader and shader type.
     static uint32_t createShader(const std::string& shaderSrcPath, ShaderType shaderType);
 
 private:
