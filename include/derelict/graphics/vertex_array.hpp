@@ -6,17 +6,13 @@
 
 namespace derelict {
 struct Data {
-    Data(const float *vertices, const unsigned int *indices, uint32_t vertexCount, uint32_t indexCount) {
-        this->vertexCount = vertexCount;
-        this->indexCount  = indexCount;
-        this->vertexData = vertices;
-        this->indexData = indices;
-    }
+    Data(const float *vertices, const unsigned int *indices, const uint32_t vertexCount, const uint32_t indexCount)
+    : vertices(vertices), indices(indices), vertexCount(vertexCount), indexCount(indexCount)  {}
 
-    const float *vertexData;
-    const unsigned int* indexData;
-    int vertexCount;
-    int indexCount;
+    const float *vertices;
+    const unsigned int* indices;
+    uint32_t vertexCount;
+    uint32_t indexCount;
 };
 
 class VertexArray {
@@ -36,11 +32,11 @@ public:
         return shader->GetId();
     }
     // Get the vertex count associated with the vertex array.
-    int GetVertexCount() const {
+    uint32_t GetVertexCount() const {
         return data->vertexCount;
     }
     // Get the index count associated with the vertex array.
-    int GetIndexCount() const {
+    uint32_t GetIndexCount() const {
         return data->indexCount;
     }
 
