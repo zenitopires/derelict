@@ -39,7 +39,6 @@ public:
 private:
     std::shared_ptr<Data> data;
     std::string shaderName;
-    // std::shared_ptr<Shader> shader;
     uint32_t vertexBuffer;
     uint32_t indexBuffer;
     uint32_t id;

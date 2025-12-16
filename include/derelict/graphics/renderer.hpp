@@ -27,9 +27,6 @@ public:
     void Clear(const glm::vec4& color) const;
     // Draw the objects that were submitted to the rendering queue.
     void Draw() const;
-
-    static ShaderManager& shaderManager;
-
 private:
     std::vector<std::shared_ptr<Renderable>> renderables;
 };

@@ -8,7 +8,7 @@ namespace derelict {
 // Shader Manager manages shader resources.
 class ShaderManager {
 public:
-    void AddShader(std::shared_ptr<Shader> shader, const std::string& name);
+    void AddShader(std::unique_ptr<Shader> shader, const std::string &name);
     void AddShader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &name);
     void RemoveShader(const std::string& name);
     uint32_t GetShader(const std::string& name) const;
@@ -22,9 +22,6 @@ public:
     ShaderManager& operator=(const ShaderManager&) = delete;
 private:
     ShaderManager() = default;
-    std::map<std::string, std::shared_ptr<Shader>> shaders;
-
-    // singleton
-    // static ShaderManager instance;
+    std::map<std::string, std::unique_ptr<Shader>> shaders;
 };
 }
