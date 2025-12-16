@@ -31,17 +31,18 @@ namespace derelict {
         glDeleteProgram(id);
     }
 
-    void Shader::Use() {
+    void Shader::Use() const {
         glUseProgram(id);
     }
 
-    void Shader::Unuse() {
+    void Shader::Unuse() const {
         glUseProgram(0);
     }
 
-    uint32_t Shader::GetId() {
+    uint32_t Shader::GetId() const {
         return id;
     }
+
 
     uint32_t Shader::createShader(const std::string& shaderSrcPath, ShaderType shaderType) {
         logDebug("Entered createShader.");

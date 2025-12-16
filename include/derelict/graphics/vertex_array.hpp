@@ -6,17 +6,13 @@
 
 namespace derelict {
 struct Data {
-    Data(const float *vertices, const unsigned int *indices, uint32_t vertexCount, uint32_t indexCount) {
-        this->vertexCount = vertexCount;
-        this->indexCount  = indexCount;
-        this->vertexData = vertices;
-        this->indexData = indices;
-    }
+    Data(const float *vertices, const unsigned int *indices, const uint32_t vertexCount, const uint32_t indexCount)
+    : vertices(vertices), indices(indices), vertexCount(vertexCount), indexCount(indexCount)  {}
 
-    const float *vertexData;
-    const unsigned int* indexData;
-    int vertexCount;
-    int indexCount;
+    const float *vertices;
+    const unsigned int* indices;
+    uint32_t vertexCount;
+    uint32_t indexCount;
 };
 
 class VertexArray {
@@ -24,19 +20,23 @@ public:
     explicit VertexArray(std::shared_ptr<Data> data);
     ~VertexArray();
     // Attribute defines the data layout for the vertex array object.
-    void Attribute();
-    // Bind binds the provided vertex array object.
-    void Bind();
-    // Unbind unbinds a previously bounded vertex array object.
-    void Unbind();
-    // GetShader returns the shader id associated with vertex array.
-    uint32_t GetShaderId() {
+    // void Attribute();
+
+    // Bind the vertex array object.
+    void Bind() const;
+    // Unbind the vertex array object.
+    // *Be careful in mixing this Unbind with other VAO Unbind, because of the nature of OpenGL, you may inadvertently unbind another VAO.*
+    void Unbind() const;
+    // Get the shader id associated with vertex array.
+    uint32_t GetShaderId() const {
         return shader->GetId();
     }
-    int GetVertexCount() {
+    // Get the vertex count associated with the vertex array.
+    uint32_t GetVertexCount() const {
         return data->vertexCount;
     }
-    int GetIndexCount() {
+    // Get the index count associated with the vertex array.
+    uint32_t GetIndexCount() const {
         return data->indexCount;
     }
 

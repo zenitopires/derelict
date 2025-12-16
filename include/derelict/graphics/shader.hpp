@@ -11,11 +11,15 @@ class Shader {
 public:
     Shader(const std::string& vertexShader, const std::string& fragmentShader);
     ~Shader();
-    void Use();
-    void Unuse();
-    uint32_t GetId();
+    // Use the shader program.
+    void Use() const;
+    // Unuse the shader program.
+    void Unuse() const;
+    // Get the shader program's id.
+    uint32_t GetId() const;
 
 private:
+    // Creates a shader program given the path to the shader and shader type.
     static uint32_t createShader(const std::string& shaderSrcPath, ShaderType shaderType);
 
 private:
