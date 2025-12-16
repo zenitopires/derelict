@@ -91,6 +91,7 @@ namespace derelict {
             glDeleteShader(shader);
             return 0;
         }
+        logDebug("successfully created shader!");
         return shader;
     }
 }

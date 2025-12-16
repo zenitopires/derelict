@@ -14,6 +14,7 @@ add_library(derelict SHARED
         src/derelict/graphics/renderer.cpp
         src/derelict/window/window.cpp
         src/derelict/application/application.cpp
+        src/derelict/graphics/shader_manager.cpp
 )
 
 set_target_properties(derelict PROPERTIES

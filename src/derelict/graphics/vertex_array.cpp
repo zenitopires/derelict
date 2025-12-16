@@ -1,17 +1,17 @@
 #include <derelict/graphics/vertex_array.hpp>
 #include <derelict/logging/logger.hpp>
 
+#include "derelict/graphics/shader_manager.hpp"
+
 namespace derelict {
 VertexArray::VertexArray(std::shared_ptr<Data> data) {
     logDebug("Entered VertexArray constructor.");
     this->data = std::move(data);
-    auto shader = std::make_shared<Shader>("assets/shaders/defaults/vertex.vert",
-        "assets/shaders/defaults/fragment.frag");
-    this->shader = std::move(shader);
     // Create vertex arrays, buffers
     glGenVertexArrays(1, &id);
     glGenBuffers(1, &vertexBuffer);
     glGenBuffers(1, &indexBuffer);
+    glUseProgram(ShaderManager::GetInstance().GetShader("basic"));
     // Switch context to vao and associate buffers and their data with it
     glBindVertexArray(id);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -31,7 +31,6 @@ VertexArray::~VertexArray() {
     glDeleteVertexArrays(1, &id);
     glDeleteBuffers(1, &vertexBuffer);
     glDeleteBuffers(1, &indexBuffer);
-    glDeleteProgram(shader->GetId());
 }
 
 // void VertexArray::Attribute() {
@@ -39,12 +38,10 @@ VertexArray::~VertexArray() {
 
 void VertexArray::Bind() const {
     // logDebug()
-    shader->Use();
     glBindVertexArray(id);
 }
 
 void VertexArray::Unbind() const {
-    shader->Unuse();
     glBindVertexArray(0);
 }
 }

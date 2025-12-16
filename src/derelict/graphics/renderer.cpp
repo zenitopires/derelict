@@ -1,5 +1,6 @@
 #include <derelict/graphics/renderer.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <derelict/graphics/shader_manager.hpp>
 
 namespace derelict {
     void Renderer::Submit(std::shared_ptr<Renderable> renderable) {
@@ -15,8 +16,9 @@ namespace derelict {
         for (const std::shared_ptr<Renderable>& renderable : renderables) {
             renderable->vao->Bind();
             // glGetUniformLocation(shader, name);
-            glUniformMatrix4fv(glGetUniformLocation(renderable->vao->GetShaderId(), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
-            glUniform3fv(glGetUniformLocation(renderable->vao->GetShaderId(), "position"), 1, glm::value_ptr(renderable->position));
+            auto& shaderManager = derelict::ShaderManager::GetInstance();
+            glUniformMatrix4fv(glGetUniformLocation(shaderManager.GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
+            glUniform3fv(glGetUniformLocation(shaderManager.GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));
             glDrawElements(GL_TRIANGLES, renderable->vao->GetIndexCount(), GL_UNSIGNED_INT, 0);
             renderable->vao->Unbind();
         }
