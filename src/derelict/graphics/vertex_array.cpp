@@ -1,7 +1,6 @@
 #include <derelict/graphics/vertex_array.hpp>
 #include <derelict/logging/logger.hpp>
-
-#include "derelict/graphics/shader_manager.hpp"
+#include <glad/glad.h>
 
 namespace derelict {
 VertexArray::VertexArray(std::shared_ptr<Data> data) {
@@ -11,7 +10,6 @@ VertexArray::VertexArray(std::shared_ptr<Data> data) {
     glGenVertexArrays(1, &id);
     glGenBuffers(1, &vertexBuffer);
     glGenBuffers(1, &indexBuffer);
-    glUseProgram(ShaderManager::GetInstance().GetShader("basic"));
     // Switch context to vao and associate buffers and their data with it
     glBindVertexArray(id);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);

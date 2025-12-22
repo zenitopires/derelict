@@ -1,8 +1,5 @@
 #pragma once
-#include <stdint.h>
-#include <glad/glad.h>
 #include <memory>
-#include "shader.hpp"
 
 namespace derelict {
 struct Data {
@@ -38,7 +35,6 @@ public:
 
 private:
     std::shared_ptr<Data> data;
-    std::string shaderName;
     uint32_t vertexBuffer;
     uint32_t indexBuffer;
     uint32_t id;
