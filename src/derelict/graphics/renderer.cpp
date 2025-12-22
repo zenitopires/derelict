@@ -15,10 +15,8 @@ namespace derelict {
     void Renderer::Draw() const {
         for (const std::shared_ptr<Renderable>& renderable : renderables) {
             renderable->vao->Bind();
-            // glGetUniformLocation(shader, name);
-            auto& shaderManager = derelict::ShaderManager::GetInstance();
-            glUniformMatrix4fv(glGetUniformLocation(shaderManager.GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
-            glUniform3fv(glGetUniformLocation(shaderManager.GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));
+            glUniformMatrix4fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
+            glUniform3fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));
             glDrawElements(GL_TRIANGLES, renderable->vao->GetIndexCount(), GL_UNSIGNED_INT, 0);
             renderable->vao->Unbind();
         }
