@@ -19,7 +19,7 @@ namespace derelict {
             glUseProgram(ShaderManager::GetInstance().GetShader(renderable->shaderName));
             glUniformMatrix4fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
             glUniform3fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));
-            glDrawElements(GL_TRIANGLES, renderable->vao->GetIndexCount(), GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(renderable->vao->GetIndexCount()), GL_UNSIGNED_INT, 0);
             renderable->vao->Unbind();
         }
     }
