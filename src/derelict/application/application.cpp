@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <derelict/logging/logger.hpp>
+#include <derelict/graphics/shader_manager.hpp>
 
 namespace derelict {
 
@@ -11,6 +12,12 @@ Application::Application() {
     Props props; // Probably gonna take this in from the user at some point
     window = std::make_unique<Window>(props);
     renderer = std::make_unique<Renderer>();
+
+    // Hmmmm, maybe I'd like to make the Shader manager part of a future scene reader. For now I'll keep it as part of the application setup.
+    // Or maybe I could leave it up to the developer to add shaders in their own apps?
+    auto& shaderManager = derelict::ShaderManager::GetInstance();
+    shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
+        "assets/shaders/defaults/fragment.frag", "basic");
 }
 
 Application::~Application() {
@@ -37,7 +44,7 @@ void Application::Run() {
     glm::mat4 transform(1.0f);
     glm::vec3 position(0.0f, 0.0f, 0.0f);
 
-    auto cube = std::make_shared<Renderable>(position, transform, vao);
+    auto cube = std::make_shared<Renderable>(position, transform, vao, "basic");
     renderer->Submit(cube);
 
     glm::vec4 clearColor(0.2f, 0.3f, 0.3f, 1.0f);

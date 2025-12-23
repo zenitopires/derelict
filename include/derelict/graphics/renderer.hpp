@@ -3,16 +3,18 @@
 #include <memory>
 #include <glm/glm.hpp>
 #include "vertex_array.hpp"
+#include "shader_manager.hpp"
 
 namespace derelict {
 class Renderable {
 public:
-    Renderable(const glm::vec3& position, const glm::mat4& transform, std::shared_ptr<VertexArray> vao) :
-    position(position), transform(transform), vao(std::move(vao)) {}
+    Renderable(const glm::vec3& position, const glm::mat4& transform, std::shared_ptr<VertexArray> vao, const std::string_view& shaderName) :
+    position(position), transform(transform), vao(std::move(vao)), shaderName(shaderName) {}
 
     glm::vec3 position;
     glm::mat4 transform;
     std::shared_ptr<VertexArray> vao;
+    std::string shaderName;
 };
 
 class Renderer {
@@ -25,7 +27,6 @@ public:
     void Clear(const glm::vec4& color) const;
     // Draw the objects that were submitted to the rendering queue.
     void Draw() const;
-
 private:
     std::vector<std::shared_ptr<Renderable>> renderables;
 };

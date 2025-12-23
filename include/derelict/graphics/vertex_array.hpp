@@ -1,8 +1,5 @@
 #pragma once
-#include <stdint.h>
-#include <glad/glad.h>
 #include <memory>
-#include "shader.hpp"
 
 namespace derelict {
 struct Data {
@@ -27,10 +24,6 @@ public:
     // Unbind the vertex array object.
     // *Be careful in mixing this Unbind with other VAO Unbind, because of the nature of OpenGL, you may inadvertently unbind another VAO.*
     void Unbind() const;
-    // Get the shader id associated with vertex array.
-    uint32_t GetShaderId() const {
-        return shader->GetId();
-    }
     // Get the vertex count associated with the vertex array.
     uint32_t GetVertexCount() const {
         return data->vertexCount;
@@ -42,7 +35,6 @@ public:
 
 private:
     std::shared_ptr<Data> data;
-    std::shared_ptr<Shader> shader;
     uint32_t vertexBuffer;
     uint32_t indexBuffer;
     uint32_t id;
