@@ -1,8 +1,10 @@
+#include <iostream>
 #include <derelict/application/application.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <derelict/logging/logger.hpp>
 #include <derelict/graphics/shader_manager.hpp>
+#include <derelict/timer/timer.hpp>
 
 namespace derelict {
 
@@ -18,6 +20,9 @@ Application::Application() {
     auto& shaderManager = derelict::ShaderManager::GetInstance();
     shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
         "assets/shaders/defaults/fragment.frag", "basic");
+
+    auto& timer = Derelict::Timer::GetInstance();
+    timer.Start();
 }
 
 Application::~Application() {
@@ -50,6 +55,8 @@ void Application::Run() {
     glm::vec4 clearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
     while (appRunning) {
+        Derelict::Timer::GetInstance().Tick();
+        std::cout << Derelict::Timer::GetInstance().DeltaTime() << '\n';
         window->OnUpdate(appRunning);
         renderer->Clear(clearColor);
         renderer->Draw();
