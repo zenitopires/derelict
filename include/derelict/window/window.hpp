@@ -3,6 +3,7 @@
 #include <string>
 #include <SDL3/SDL.h>
 
+namespace derelict {
 struct Props {
     std::string title = "Derelict Engine";
     unsigned int width = 1280;
@@ -26,7 +27,6 @@ private:
     void Init();
     void Shutdown();
 
-private:
     std::string title;
     unsigned int width;
     unsigned int height;
@@ -36,3 +36,4 @@ private:
     SDL_GLContext glContext = nullptr;
     SDL_Event m_Event;
 };
+}

@@ -7,7 +7,6 @@
 #include <derelict/timer/timer.hpp>
 
 namespace derelict {
-
 Application::Application() {
     logInfo("Running application!");
 

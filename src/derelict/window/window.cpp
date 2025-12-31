@@ -4,15 +4,14 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_init.h>
 #include <derelict/logging/logger.hpp>
-
+namespace derelict {
 bool s_SDLInitialized = false;
 
 Window::Window(const Props& props)
     : title(props.title),
       width(props.width),
       height(props.height),
-      vsync(props.vsync)
-{
+      vsync(props.vsync) {
     Init();
 }
 
@@ -84,29 +83,29 @@ void Window::OnUpdate(bool& appRunning) {
     while (SDL_PollEvent(&m_Event)) {
 
         switch (m_Event.type) {
+            case SDL_EVENT_QUIT:
+                appRunning = false;
+                break;
 
-        case SDL_EVENT_QUIT:
-            appRunning = false;
-            break;
+            case SDL_EVENT_WINDOW_RESIZED: {
+                unsigned int newWidth  = m_Event.window.data1;
+                unsigned int newHeight = m_Event.window.data2;
 
-        case SDL_EVENT_WINDOW_RESIZED: {
-            unsigned int newWidth  = m_Event.window.data1;
-            unsigned int newHeight = m_Event.window.data2;
+                logDebug("Window resized: {} x {}", newWidth, newHeight);
 
-            logDebug("Window resized: {} x {}", newWidth, newHeight);
+                width  = newWidth;
+                height = newHeight;
 
-            width  = newWidth;
-            height = newHeight;
+                glViewport(0, 0, width, height);
+                break;
+            }
 
-            glViewport(0, 0, width, height);
-            break;
-        }
+            case SDL_EVENT_WINDOW_MINIMIZED:
+                break;
 
-        case SDL_EVENT_WINDOW_MINIMIZED:
-            break;
-
-        case SDL_EVENT_WINDOW_MAXIMIZED:
-            break;
+            case SDL_EVENT_WINDOW_MAXIMIZED:
+                break;
         }
     }
+}
 }

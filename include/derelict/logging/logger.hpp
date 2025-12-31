@@ -3,18 +3,17 @@
 #include <spdlog/spdlog.h>
 
 namespace derelict {
+class Logger {
+public:
+    static void Init();
 
-    class Logger {
-    public:
-        static void Init();
+    inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
+        return coreLogger;
+    }
 
-        inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() {
-            return coreLogger;
-        }
-
-    private:
-        static std::shared_ptr<spdlog::logger> coreLogger;
-    };
+private:
+    static std::shared_ptr<spdlog::logger> coreLogger;
+};
 
 #define logTrace(...)  ::derelict::Logger::GetCoreLogger()->log( \
 spdlog::source_loc{__FILE__, __LINE__, __func__},            \
@@ -39,5 +38,4 @@ spdlog::level::err, __VA_ARGS__)
 #define logFatal(...)  ::derelict::Logger::GetCoreLogger()->log( \
 spdlog::source_loc{__FILE__, __LINE__, __func__},            \
 spdlog::level::critical, __VA_ARGS__)
-
 }
