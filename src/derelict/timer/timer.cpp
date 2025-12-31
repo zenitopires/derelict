@@ -7,7 +7,9 @@ namespace Derelict {
         return currTime;
     }
 
-    // double
+    double Timer::DeltaTime() const {
+        return deltaTime;
+    }
 
     void Timer::Reset() {
         const uint64_t currTime = mach_absolute_time();
@@ -55,6 +57,15 @@ namespace Derelict {
             deltaTime = 0.0f;
         }
     }
+
+    double Timer::TotalTime() const {
+        if (stopped) {
+            return (stopTime - pausedTime - baseTime) * secondsPerCount;
+        }
+        return (currTime - pausedTime - baseTime) * secondsPerCount;
+    }
+
+
 
 
 }

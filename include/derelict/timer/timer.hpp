@@ -13,21 +13,8 @@ public:
     }
 
     double GetCurrTime() const;
-    // double GetSeconds() const;
-    // double GetMilliseconds() const;
-
-    double DeltaTime() const { return deltaTime; }
-    double TotalTime() const {
-        if (stopped)
-        {
-            return static_cast<float>(((stopTime - pausedTime) - baseTime) * secondsPerCount);
-        }
-        else
-        {
-            return static_cast<float>(((currTime - pausedTime) - baseTime) * secondsPerCount);
-        }
-    }
-
+    double DeltaTime() const;
+    double TotalTime() const;
     void Reset();
     void Start();
     void Stop();

@@ -56,7 +56,6 @@ void Application::Run() {
 
     while (appRunning) {
         Derelict::Timer::GetInstance().Tick();
-        std::cout << Derelict::Timer::GetInstance().DeltaTime() << '\n';
         window->OnUpdate(appRunning);
         renderer->Clear(clearColor);
         renderer->Draw();
