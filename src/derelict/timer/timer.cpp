@@ -64,8 +64,4 @@ namespace Derelict {
         }
         return (currTime - pausedTime - baseTime) * secondsPerCount;
     }
-
-
-
-
 }
