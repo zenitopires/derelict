@@ -7,8 +7,11 @@ namespace derelict {
     class Application {
     public:
         Application();
-        ~Application();
+
+        virtual ~Application();
         void Run();
+        virtual void GameInit() = 0;
+        virtual void GameOnUpdate() = 0;
     private:
         std::unique_ptr<Window> window;
         std::unique_ptr<Renderer> renderer;

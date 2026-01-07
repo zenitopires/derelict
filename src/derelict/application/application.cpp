@@ -14,12 +14,6 @@ Application::Application() {
     window = std::make_unique<Window>(props);
     renderer = std::make_unique<Renderer>();
 
-    // Hmmmm, maybe I'd like to make the Shader manager part of a future scene reader. For now I'll keep it as part of the application setup.
-    // Or maybe I could leave it up to the developer to add shaders in their own apps?
-    auto& shaderManager = derelict::ShaderManager::GetInstance();
-    shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
-        "assets/shaders/defaults/fragment.frag", "basic");
-
     auto& timer = Derelict::Timer::GetInstance();
     timer.Start();
 }
@@ -60,4 +54,16 @@ void Application::Run() {
         renderer->Draw();
     }
 }
+
+// void Application::GameInit() {
+//     auto& shaderManager = derelict::ShaderManager::GetInstance();
+//     shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
+//         "assets/shaders/defaults/fragment.frag", "basic");
+// }
+//
+// void Application::GameOnUpdate() {
+//
+// }
+
+
 }
