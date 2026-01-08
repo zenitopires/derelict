@@ -14,6 +14,5 @@ namespace derelict {
         virtual void GameOnUpdate() = 0;
     private:
         std::unique_ptr<Window> window;
-        std::unique_ptr<Renderer> renderer;
     };
 }
