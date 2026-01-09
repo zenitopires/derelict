@@ -8,7 +8,8 @@
 
 namespace derelict {
 Application::Application() {
-    logInfo("Running application!");
+    derelict::Logger::Init();
+    logInfo("Initiating Derelict engine systems.");
 
     Props props; // Probably gonna take this in from the user at some point
     window = std::make_unique<Window>(props);
@@ -27,6 +28,7 @@ void Application::Exit() {
 
 
 void Application::Run() {
+    logInfo("Running Derelict engine.");
     appRunning = true;
 
     while (appRunning) {

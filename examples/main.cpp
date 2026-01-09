@@ -65,8 +65,6 @@ public:
 };
 
 int main() {
-    derelict::Logger::Init();
-    logInfo("Starting Derelict engine");
     std::unique_ptr<Game> game = std::make_unique<Game>();
     game->Run();
     return 0;
