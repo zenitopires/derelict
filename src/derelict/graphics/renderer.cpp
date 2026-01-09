@@ -13,7 +13,6 @@ void Renderer::SetClearColor(const glm::vec4 &color) {
 }
 
 void Renderer::Clear() const {
-    // if (clearColor)
     glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
