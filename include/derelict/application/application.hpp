@@ -10,9 +10,11 @@ namespace derelict {
 
         virtual ~Application();
         void Run();
+        void Exit();
         virtual void GameInit() = 0;
         virtual void GameOnUpdate() = 0;
     private:
+        bool appRunning = true;
         std::unique_ptr<Window> window;
     };
 }

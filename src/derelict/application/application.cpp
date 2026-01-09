@@ -21,8 +21,13 @@ Application::~Application() {
     logInfo("Shutting down application...");
 }
 
+void Application::Exit() {
+    appRunning = false;
+}
+
+
 void Application::Run() {
-    bool appRunning = true;
+    appRunning = true;
 
     while (appRunning) {
         Derelict::Timer::GetInstance().Tick();
