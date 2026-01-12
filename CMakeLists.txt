@@ -17,6 +17,7 @@ add_library(derelict SHARED
         src/derelict/graphics/shader_manager.cpp
         src/derelict/timer/timer.cpp
         src/derelict/input/input.cpp
+        src/derelict/opengl/renderer.cpp
 )
 
 set_target_properties(derelict PROPERTIES

@@ -8,7 +8,9 @@
 
 namespace derelict {
 Application::Application() {
-    derelict::Logger::Init();
+    Logger::Init();
+    Renderer::GetInstance().SetAPI(GraphicsAPI::OpenGL);
+
     logInfo("Initiating Derelict engine systems.");
 
     Props props; // Probably gonna take this in from the user at some point
