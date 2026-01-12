@@ -8,8 +8,12 @@ void Renderer::Submit(std::shared_ptr<Renderable> renderable) {
     renderables.push_back(std::move(renderable));
 }
 
-void Renderer::Clear(const glm::vec4 &color) const {
-    glClearColor(color.r, color.g, color.b, color.a);
+void Renderer::SetClearColor(const glm::vec4 &color) {
+    clearColor = color;
+}
+
+void Renderer::Clear() const {
+    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
