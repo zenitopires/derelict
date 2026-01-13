@@ -16,7 +16,6 @@ void OpenGLRenderer::Clear() const {
 void OpenGLRenderer::Draw() const {
     for (const std::shared_ptr<Renderable>& renderable : renderables) {
         renderable->vao->Bind();
-        // Renderer::GetInstance().GetShaderManager().GetShader()
         glUseProgram(Renderer::GetInstance().GetShaderManager().GetShader(renderable->shaderName));
         glUniformMatrix4fv(glGetUniformLocation(Renderer::GetInstance().GetShaderManager().GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
         glUniform3fv(glGetUniformLocation(Renderer::GetInstance().GetShaderManager().GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));

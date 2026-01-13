@@ -10,7 +10,6 @@ namespace derelict {
 Application::Application() {
     Logger::Init();
     Renderer::Init(GraphicsAPI::OpenGL);
-    // Renderer::GetInstance().SetAPI(GraphicsAPI::OpenGL);
 
     logInfo("Initiating Derelict engine systems.");
 

@@ -25,14 +25,10 @@ public:
         return API().Create(vertexShader, fragmentShader);
     }
 
-    // static ShaderManager& GetInstance() {
-    //     static ShaderManager instance;
-    //     return instance;
-    // }
 
-    // ShaderManager(const ShaderManager&) = delete;
-    // ShaderManager& operator=(const ShaderManager&) = delete;
-// private:
+    ShaderManager(const ShaderManager&) = delete;
+    ShaderManager& operator=(const ShaderManager&) = delete;
+
     std::map<std::string, std::unique_ptr<IShader>> shaders;
     std::unique_ptr<IShader> impl;
 };

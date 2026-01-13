@@ -5,7 +5,6 @@
 namespace derelict {
 class OpenGLShader : public IShader {
 public:
-    // OpenGLShader(const std::string& vertexShader, const std::string& fragmentShader) = delete;
     OpenGLShader(const uint32_t id) : id(id) {}
     OpenGLShader() = default;
 
