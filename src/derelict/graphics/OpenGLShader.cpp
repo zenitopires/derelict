@@ -1,10 +1,10 @@
-#include <derelict/graphics/shader.hpp>
+#include <derelict/graphics/OpenGLShader.hpp>
 #include <fstream>
 #include <glad/glad.h>
 #include <derelict/logging/logger.hpp>
 
 namespace derelict {
-Shader::Shader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath) {
+OpenGLShader::OpenGLShader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath) {
     uint32_t vertexShader = createShader(vertexShaderPath, ShaderType::VertexShader);
     uint32_t fragmentShader = createShader(fragmentShaderPath, ShaderType::FragmentShader);
     uint32_t shader = glCreateProgram();
@@ -26,25 +26,20 @@ Shader::Shader(const std::string &vertexShaderPath, const std::string &fragmentS
     id = shader;
 }
 
-Shader::~Shader() {
+OpenGLShader::~OpenGLShader() {
     logDebug("Shader deleted!");
     glDeleteProgram(id);
 }
 
-void Shader::Use() const {
+void OpenGLShader::Use() const {
     glUseProgram(id);
 }
 
-void Shader::Unuse() const {
-    glUseProgram(0);
-}
-
-uint32_t Shader::GetId() const {
+uint32_t OpenGLShader::GetId() const {
     return id;
 }
 
-
-uint32_t Shader::createShader(const std::string& shaderSrcPath, ShaderType shaderType) {
+uint32_t OpenGLShader::Create(const std::string& shaderSrcPath, ShaderType shaderType) {
     logDebug("Entered createShader.");
     logDebug("Attempting to open shader file at {}.", shaderSrcPath.c_str());
 
