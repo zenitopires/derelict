@@ -9,7 +9,6 @@ target_include_directories(glad PUBLIC vendor/glad/include)
 
 add_library(derelict SHARED
         src/derelict/logging/logger.cpp
-        src/derelict/graphics/shader.cpp
         src/derelict/graphics/vertex_array.cpp
         src/derelict/graphics/renderer.cpp
         src/derelict/window/window.cpp
@@ -17,6 +16,8 @@ add_library(derelict SHARED
         src/derelict/graphics/shader_manager.cpp
         src/derelict/timer/timer.cpp
         src/derelict/input/input.cpp
+        src/derelict/opengl/renderer.cpp
+        src/derelict/opengl/shader.cpp
 )
 
 set_target_properties(derelict PROPERTIES

@@ -1,30 +1,27 @@
 #include <derelict/graphics/renderer.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <derelict/graphics/shader_manager.hpp>
-#include <glad/glad.h>
+#include <derelict/opengl/renderer.hpp>
+
+#include "derelict/opengl/shader.hpp"
+
+std::unique_ptr<derelict::Renderer> derelict::Renderer::rendererInst = nullptr;
+std::unique_ptr<derelict::ShaderManager> derelict::Renderer::shaderManagerInst = nullptr;
 
 namespace derelict {
-void Renderer::Submit(std::shared_ptr<Renderable> renderable) {
-    renderables.push_back(std::move(renderable));
-}
+void Renderer::Init(GraphicsAPI api) {
+    if (rendererInst != nullptr && rendererInst->impl) throw std::logic_error("Renderer already initialized.");
 
-void Renderer::SetClearColor(const glm::vec4 &color) {
-    clearColor = color;
-}
+    rendererInst = std::make_unique<Renderer>();
+    shaderManagerInst = std::make_unique<ShaderManager>();
 
-void Renderer::Clear() const {
-    glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
-void Renderer::Draw() const {
-    for (const std::shared_ptr<Renderable>& renderable : renderables) {
-        renderable->vao->Bind();
-        glUseProgram(ShaderManager::GetInstance().GetShader(renderable->shaderName));
-        glUniformMatrix4fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "transform"), 1, GL_FALSE, glm::value_ptr(renderable->transform));
-        glUniform3fv(glGetUniformLocation(ShaderManager::GetInstance().GetShader(renderable->shaderName), "position"), 1, glm::value_ptr(renderable->position));
-        glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(renderable->vao->GetIndexCount()), GL_UNSIGNED_INT, 0);
-        renderable->vao->Unbind();
+    switch (api) {
+        case GraphicsAPI::OpenGL:
+            rendererInst->impl = std::make_unique<OpenGLRenderer>();
+            // Initialize ShaderManager as well
+            shaderManagerInst->impl = std::make_unique<OpenGLShader>();
+            break;
+        default:
+            throw std::logic_error("API is not supported! Only OpenGL is supported!");
     }
 }
 }

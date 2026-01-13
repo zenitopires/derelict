@@ -2,6 +2,8 @@
 #include <vector>
 #include <memory>
 #include <glm/glm.hpp>
+
+#include "backend.hpp"
 #include "vertex_array.hpp"
 #include "shader_manager.hpp"
 
@@ -17,25 +19,50 @@ public:
     std::string shaderName;
 };
 
+class IRenderer {
+public:
+    IRenderer() = default;
+    virtual ~IRenderer() = default;
+    virtual void Clear() const = 0;
+    virtual void Draw() const = 0;
+    virtual void Submit(std::shared_ptr<Renderable> renderable) = 0;
+};
+
 class Renderer {
 public:
     Renderer() = default;
 
+    static void Init(GraphicsAPI api);
+
     static Renderer& GetInstance() {
-        static Renderer instance;
-        return instance;
+        return *rendererInst;
     }
 
-    // Set clear color.
-    void SetClearColor(const glm::vec4& color);
+    static ShaderManager& GetShaderManager() {
+        return *shaderManagerInst;
+    }
+
+    IRenderer& API() const {
+        if (!impl) throw std::logic_error("Renderer not initialized");
+        return *impl;
+    }
+
     // Submits a renderable object to the rendering queue so that it can be drawn later.
-    void Submit(std::shared_ptr<Renderable> renderable);
+    void Submit(const std::shared_ptr<Renderable> &renderable) const {
+        API().Submit(renderable);
+    }
     // Specify color to be used by glClear().
-    void Clear() const;
+    void Clear() const {
+        API().Clear();
+    }
     // Draw the objects that were submitted to the rendering queue.
-    void Draw() const;
+    void Draw() const {
+        API().Draw();
+    }
+
+    static std::unique_ptr<Renderer> rendererInst;
+    static std::unique_ptr<ShaderManager> shaderManagerInst;
 private:
-    std::vector<std::shared_ptr<Renderable>> renderables;
-    glm::vec4 clearColor;
+    std::unique_ptr<IRenderer> impl;
 };
 }

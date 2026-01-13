@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <string>
 
 namespace derelict {
@@ -7,22 +8,12 @@ enum class ShaderType {
     FragmentShader
 };
 
-class Shader {
+class IShader {
 public:
-    Shader(const std::string& vertexShader, const std::string& fragmentShader);
-    ~Shader();
-    // Use the shader program.
-    void Use() const;
-    // Unuse the shader program.
-    void Unuse() const;
-    // Get the shader program's id.
-    uint32_t GetId() const;
-
-private:
-    // Creates a shader program given the path to the shader and shader type.
-    static uint32_t createShader(const std::string& shaderSrcPath, ShaderType shaderType);
-
-private:
-    uint32_t id;
+    IShader() = default;
+    virtual ~IShader() = default;
+    virtual std::unique_ptr<IShader> Create(const std::string& vertexShader, const std::string& fragmentShader) = 0;
+    virtual void Use() const = 0;
+    virtual uint32_t GetId() const = 0;
 };
 }

@@ -2,9 +2,8 @@
 #include <derelict/logging/logger.hpp>
 
 #include "glad/glad.h"
-
 namespace derelict {
-void ShaderManager::AddShader(std::unique_ptr<Shader> shader, const std::string &name) {
+void ShaderManager::AddShader(std::unique_ptr<IShader> shader, const std::string &name) {
     if (shaders.contains(name)) {
         logError("A shader with the name '{}' name already exists!", name);
         return;
@@ -17,16 +16,7 @@ void ShaderManager::AddShader(const std::string &vertexShader, const std::string
         logWarn("A shader with the name '{}' name already exists!", name);
         return;
     }
-    shaders.emplace(name, std::make_unique<Shader>(vertexShader, fragmentShader));
-}
-
-void ShaderManager::RemoveShader(const std::string &name) {
-    if (!shaders.contains(name)) {
-        logWarn("Can't delete shader because shader with the name '{}' does not exist!", name);
-        return;
-    }
-    glDeleteProgram(shaders.at(name)->GetId());
-    shaders.erase(name);
+    shaders.emplace(name, API().Create(vertexShader, fragmentShader));
 }
 
 uint32_t ShaderManager::GetShader(const std::string& name) const {

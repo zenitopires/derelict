@@ -1,12 +1,14 @@
+#include "derelict/opengl/shader.hpp"
+
 #include <derelict/graphics/shader.hpp>
 #include <fstream>
 #include <glad/glad.h>
 #include <derelict/logging/logger.hpp>
 
 namespace derelict {
-Shader::Shader(const std::string &vertexShaderPath, const std::string &fragmentShaderPath) {
-    uint32_t vertexShader = createShader(vertexShaderPath, ShaderType::VertexShader);
-    uint32_t fragmentShader = createShader(fragmentShaderPath, ShaderType::FragmentShader);
+std::unique_ptr<IShader> OpenGLShader::Create(const std::string &vertexShaderPath, const std::string &fragmentShaderPath) {
+    uint32_t vertexShader = CreateShader(vertexShaderPath, ShaderType::VertexShader);
+    uint32_t fragmentShader = CreateShader(fragmentShaderPath, ShaderType::FragmentShader);
     uint32_t shader = glCreateProgram();
     glAttachShader(shader, vertexShader);
     glAttachShader(shader, fragmentShader);
@@ -23,28 +25,22 @@ Shader::Shader(const std::string &vertexShaderPath, const std::string &fragmentS
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     logDebug("Created shader program, id: {}", shader);
-    id = shader;
+    return std::make_unique<OpenGLShader>(shader);
 }
 
-Shader::~Shader() {
-    logDebug("Shader deleted!");
+OpenGLShader::~OpenGLShader() {
     glDeleteProgram(id);
 }
 
-void Shader::Use() const {
+void OpenGLShader::Use() const {
     glUseProgram(id);
 }
 
-void Shader::Unuse() const {
-    glUseProgram(0);
-}
-
-uint32_t Shader::GetId() const {
+uint32_t OpenGLShader::GetId() const {
     return id;
 }
 
-
-uint32_t Shader::createShader(const std::string& shaderSrcPath, ShaderType shaderType) {
+uint32_t OpenGLShader::CreateShader(const std::string& shaderSrcPath, ShaderType shaderType) {
     logDebug("Entered createShader.");
     logDebug("Attempting to open shader file at {}.", shaderSrcPath.c_str());
 
@@ -92,6 +88,7 @@ uint32_t Shader::createShader(const std::string& shaderSrcPath, ShaderType shade
         return 0;
     }
     logDebug("successfully created shader!");
+
     return shader;
 }
 }

@@ -25,7 +25,6 @@ VertexArray::VertexArray(std::shared_ptr<Data> data) {
 }
 
 VertexArray::~VertexArray() {
-    logDebug("Vertex array object deleted, id: {}!", id);
     glDeleteVertexArrays(1, &id);
     glDeleteBuffers(1, &vertexBuffer);
     glDeleteBuffers(1, &indexBuffer);

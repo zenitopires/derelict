@@ -11,9 +11,6 @@ public:
 
     Game() {
         Game::GameInit();
-        glm::vec4 clearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        derelict::Renderer::GetInstance().SetClearColor(clearColor);
-        derelict::Renderer::GetInstance().Clear();
 
         float vertices[] = {
             0.5f,  0.5f, 0.0f,   1, 0, 0,
@@ -58,8 +55,7 @@ public:
     }
 
     void GameInit() override {
-        auto& shaderManager = derelict::ShaderManager::GetInstance();
-        shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
+        derelict::Renderer::GetInstance().GetShaderManager().AddShader("assets/shaders/defaults/vertex.vert",
             "assets/shaders/defaults/fragment.frag", "basic");
     }
 };
