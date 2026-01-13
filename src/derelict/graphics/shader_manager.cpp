@@ -16,18 +16,18 @@ void ShaderManager::AddShader(const std::string &vertexShader, const std::string
         logWarn("A shader with the name '{}' name already exists!", name);
         return;
     }
-    shaders.emplace(name, API().CreateShader(vertexShader, fragmentShader));
+    shaders.emplace(name, API().Create(vertexShader, fragmentShader));
     //std::make_unique<IShader>(vertexShader, fragmentShader));
 }
 
-void ShaderManager::RemoveShader(const std::string &name) {
-    if (!shaders.contains(name)) {
-        logWarn("Can't delete shader because shader with the name '{}' does not exist!", name);
-        return;
-    }
-    glDeleteProgram(shaders.at(name)->GetId());
-    shaders.erase(name);
-}
+// void ShaderManager::RemoveShader(const std::string &name) {
+//     if (!shaders.contains(name)) {
+//         logWarn("Can't delete shader because shader with the name '{}' does not exist!", name);
+//         return;
+//     }
+//     glDeleteProgram(shaders.at(name)->GetId());
+//     shaders.erase(name);
+// }
 
 uint32_t ShaderManager::GetShader(const std::string& name) const {
     if (!shaders.contains(name)) {

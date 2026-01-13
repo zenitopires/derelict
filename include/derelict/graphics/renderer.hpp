@@ -32,12 +32,15 @@ class Renderer {
 public:
     Renderer() = default;
 
+    static void Init(GraphicsAPI api);
+
     static Renderer& GetInstance() {
-        static Renderer instance;
-        return instance;
+        return *rendererInst;
     }
 
-    void SetAPI(GraphicsAPI api);
+    static ShaderManager& GetShaderManager() {
+        return *shaderManagerInst;
+    }
 
     IRenderer& API() const {
         if (!impl) throw std::logic_error("Renderer not initialized");
@@ -56,6 +59,9 @@ public:
     void Draw() const {
         API().Draw();
     }
+
+    static std::unique_ptr<Renderer> rendererInst;
+    static std::unique_ptr<ShaderManager> shaderManagerInst;
 private:
     std::unique_ptr<IRenderer> impl;
 };

@@ -55,8 +55,7 @@ public:
     }
 
     void GameInit() override {
-        auto& shaderManager = derelict::ShaderManager::GetInstance();
-        shaderManager.AddShader("assets/shaders/defaults/vertex.vert",
+        derelict::Renderer::GetInstance().GetShaderManager().AddShader("assets/shaders/defaults/vertex.vert",
             "assets/shaders/defaults/fragment.frag", "basic");
     }
 };
