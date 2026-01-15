@@ -12,7 +12,6 @@ public:
 
     void AddShader(std::unique_ptr<IShader> shader, const std::string &name);
     void AddShader(const std::string &vertexShader, const std::string &fragmentShader, const std::string &name);
-    // void RemoveShader(const std::string& name);
     uint32_t GetShader(const std::string& name) const;
 
     IShader& API() const {
@@ -24,7 +23,6 @@ public:
         logDebug("Creating shader");
         return API().Create(vertexShader, fragmentShader);
     }
-
 
     ShaderManager(const ShaderManager&) = delete;
     ShaderManager& operator=(const ShaderManager&) = delete;

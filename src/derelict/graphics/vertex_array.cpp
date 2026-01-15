@@ -1,4 +1,4 @@
-#include <derelict/graphics/vertex_array.hpp>
+#include <derelict/opengl/vertex_array.hpp>
 #include <derelict/logging/logger.hpp>
 #include <glad/glad.h>
 

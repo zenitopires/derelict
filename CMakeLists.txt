@@ -18,6 +18,7 @@ add_library(derelict SHARED
         src/derelict/input/input.cpp
         src/derelict/opengl/renderer.cpp
         src/derelict/opengl/shader.cpp
+        src/derelict/opengl/renderable.cpp
 )
 
 set_target_properties(derelict PROPERTIES
