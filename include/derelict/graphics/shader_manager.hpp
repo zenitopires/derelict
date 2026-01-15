@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include <map>
+#include <derelict/logging/logger.hpp>
 #include "shader.hpp"
-#include "derelict/logging/logger.hpp"
 
 namespace derelict {
 // Shader Manager manages shader resources.

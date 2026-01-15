@@ -1,13 +1,11 @@
 #pragma once
-#include "derelict/graphics/renderable.hpp"
 #include <string>
+#include <derelict/graphics/renderable.hpp>
 #include "vertex_array.hpp"
 
 namespace derelict {
 class OpenGLRenderable : public IRenderable {
 public:
-    // glm::vec3 position;
-    // glm::mat4 transform;
     std::shared_ptr<VertexArray> vao;
     std::string shaderName;
 
