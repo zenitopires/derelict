@@ -1,31 +1,21 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <glm/glm.hpp>
-
 #include "backend.hpp"
-#include "vertex_array.hpp"
 #include "shader_manager.hpp"
+#include "renderable.hpp"
 
 namespace derelict {
-class Renderable {
-public:
-    Renderable(const glm::vec3& position, const glm::mat4& transform, std::shared_ptr<VertexArray> vao, const std::string_view& shaderName) :
-    position(position), transform(transform), vao(std::move(vao)), shaderName(shaderName) {}
-
-    glm::vec3 position;
-    glm::mat4 transform;
-    std::shared_ptr<VertexArray> vao;
-    std::string shaderName;
-};
-
 class IRenderer {
 public:
     IRenderer() = default;
     virtual ~IRenderer() = default;
     virtual void Clear() const = 0;
     virtual void Draw() const = 0;
-    virtual void Submit(std::shared_ptr<Renderable> renderable) = 0;
+    virtual std::shared_ptr<IRenderable> CreateRenderable(const float* vertices, const unsigned int* indices,
+      uint32_t vertexCount, uint32_t indexCount, const glm::vec3& position, const glm::mat4& transform,
+      std::string_view shaderName) = 0;
+    virtual void Submit(std::shared_ptr<IRenderable> renderable) = 0;
 };
 
 class Renderer {
@@ -47,8 +37,14 @@ public:
         return *impl;
     }
 
+    std::shared_ptr<IRenderable> CreateRenderable(const float *vertices, const unsigned int *indices,
+        const uint32_t vertexCount, const uint32_t indexCount,
+        const glm::vec3& position, const glm::mat4& transform, const std::string_view& shaderName) const {
+        return API().CreateRenderable(vertices, indices, vertexCount, indexCount, position, transform, shaderName);
+    }
+
     // Submits a renderable object to the rendering queue so that it can be drawn later.
-    void Submit(const std::shared_ptr<Renderable> &renderable) const {
+    void Submit(const std::shared_ptr<IRenderable> &renderable) const {
         API().Submit(renderable);
     }
     // Specify color to be used by glClear().

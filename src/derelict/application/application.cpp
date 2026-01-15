@@ -5,6 +5,7 @@
 #include <derelict/logging/logger.hpp>
 #include <derelict/graphics/shader_manager.hpp>
 #include <derelict/timer/timer.hpp>
+#include <derelict/graphics/renderer.hpp>
 
 namespace derelict {
 Application::Application() {

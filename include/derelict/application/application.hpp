@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include <derelict/window/window.hpp>
-#include <derelict/graphics/renderer.hpp>
 
 namespace derelict {
     class Application {
