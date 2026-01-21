@@ -26,6 +26,8 @@ cd build/examples
 ```
 If all goes well. You should see a colorful rectangle drawn on your screen.
 
+** As of right now, Ive only tested this on MacOS. It won't compile on Linux or Windows... yet**
+
 # Libraries
 Check out the dependencies of the project [here](docs/libraries.md)!
 
